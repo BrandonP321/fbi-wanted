@@ -1,0 +1,12 @@
+.filters-wrapper {
+    width: 30%;
+    height: 100vh;
+    background-color: salmon;
+    display: inline-block;
+}
+
+.filters-wrapper.sticky {
+    position: fixed;
+    top: 0;
+    right: 0;
+}

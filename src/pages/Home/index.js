@@ -4,112 +4,89 @@ import Filters from '../../components/Filters'
 import WantedList from '../../components/WantedList'
 import axios from 'axios'
 import API from '../../utils/API'
+import './index.css'
 
-// array of crimes and the queries for getting them from the api
-const crimes = [
-    {
-        name: 'Capitol Riot',
-        queries: ['capitol']
-    },
-    {
-        name: 'Human Trafficking',
-        queries: ['human trafficking']
-    },
-    {
-        name: 'Homicide',
-        queries: ['homicide', 'murder']
-    },
-    {
-        name: 'Case of the Week',
-        queries: ['case of the week']
-    },
-    {
-        name: 'Counterintelligence',
-        queries: ['counterintelligence']
-    },
-    {
-        name: 'Kidnappings & missing persons',
-        queries: ['kidnapping', 'missing persons']
-    },
-    {
-        name: "Cyber's Most Wanted",
-        queries: ["cyber's most wanted"]
-    },
-    {
-        name: 'China Threat',
-        queries: ['china threat']
-    },
-    {
-        name: "Ten Most Wanted Fugitives",
-        queries: ["ten most wanted fugitives"]
-    },
-    {
-        name: "Endangered Child Alert Program",
-        queries: ["endangered child alert program"]
-    },
-    {
-        name: "Operation Legend",
-        queries: ["operation legend"]
-    },
-    {
-        name: "Crimes against children",
-        queries: ["crimes against children"]
-    },
-    {
-        name: "Bank Robbers",
-        queries: ["bank robbers"]
-    },
-    {
-        name: "Terrorists",
-        queries: ["terrorists"]
-    },
-]
-
-export default function Home() {  
+export default function Home() {
     const wantedPeople = useRef([])
     const setWantedPeople = data => {
         wantedPeople.current = data
     }
 
-    const [wantedPeopleToDisplay, setWantedPeopleToDisplay] = useState([])
+    const [filteredWantedPeople, setFilteredWantedPeople] = useState([])
+
+    const [displayedPeople, setDisplayedPeople] = useState([])
+
+    // current page of list of wanted people, starts counting at 0 but will be displayed as 1
+    const [page, setPage] = useState(0)
 
     const [filters, setFilters] = useState({
         subject: [],
         sex: [],
         location: '',
-        reward: null
     })
 
     useEffect(() => {
         // make request to fbi api for list of all wanted persons
-        // because api only allows for max of 50 records per page, amount requests needed will have to be determined after first api call
-        // getAllWanted(1)
+        getAllWanted()
     }, [])
+
+    useEffect(() => {
+        // when either the page or the arr of filtered wanted people is updated, update arr of people displayed on the page
+        const startIndex = page * 10
+        let endIndex
+        // check if end index is less than or equal to largest index in the arr of filtered people
+        if (page * 10 + 9 <= filteredWantedPeople.length - 1) {
+            // expression allows for 10 people to be displayed at a time
+            endIndex = page * 10 + 9
+        } else {
+            // else less than 10 people are left to be displayed so end index is last index of arr
+            endIndex = filteredWantedPeople.length - 1
+        }
+
+        // update state with array of 10 people to display
+        setDisplayedPeople(filteredWantedPeople.slice(startIndex, endIndex))
+    }, [page, filteredWantedPeople])
 
     const getAllWanted = () => {
         // make request to server for wanted persons info
-        API.getAllWanted().then(res => {
-            console.log(res.data)
-            // store wanted people data in ref hook
-            setWantedPeople(res.data)
-        })
-        .catch(err => {
-            console.log(err)
-        })
+        API.getAllWanted()
+            .then(res => {
+                console.log(res.data)
+                // store wanted people data in ref hook
+                setWantedPeople(res.data)
+
+                // people to display can also be set at this point as no filters have been placed yet
+                setFilteredWantedPeople(res.data)
+            })
+            .catch(err => {
+                console.log(err)
+            })
     }
 
-    const updateWantedPeople = (peopleArr=[]) => {
+    const updateWantedPeople = (peopleArr = []) => {
         console.log(peopleArr)
+    }
+
+    const pageUp = () => {
+        setPage(page + 1)
+    }
+
+    const pageDown = () => {
+        setPage(page - 1)
     }
 
     return (
         <>
             <Hero />
-            <WantedList />
-            <Filters
-                filters={filters}
-                setFilters={filters}
-            />
+            <div className='content-wrapper'>
+                <WantedList 
+                    wantedPeople={displayedPeople}
+                />
+                <Filters
+                    filters={filters}
+                    setFilters={setFilters}
+                />
+            </div>
         </>
     )
 }

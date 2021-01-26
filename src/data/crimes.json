@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Capitol Riot",
+        "queries": ["capitol"]
+    },
+    {
+        "name": "Human Trafficking",
+        "queries": ["human trafficking"]
+    },
+    {
+        "name": "Homicide",
+        "queries": ["homicide", "murder"]
+    },
+    {
+        "name": "Case of the Week",
+        "queries": ["case of the week"]
+    },
+    {
+        "name": "Counterintelligence",
+        "queries": ["counterintelligence"]
+    },
+    {
+        "name": "Kidnappings & missing persons",
+        "queries": ["kidnapping", "missing persons"]
+    },
+    {
+        "name": "Cyber's Most Wanted",
+        "queries": ["cyber's most wanted"]
+    },
+    {
+        "name": "China Threat",
+        "queries": ["china threat"]
+    },
+    {
+        "name": "Ten Most Wanted Fugitives",
+        "queries": ["ten most wanted fugitives"]
+    },
+    {
+        "name": "Endangered Child Alert Program",
+        "queries": ["endangered child alert program"]
+    },
+    {
+        "name": "Operation Legend",
+        "queries": ["operation legend"]
+    },
+    {
+        "name": "Crimes against children",
+        "queries": ["crimes against children"]
+    },
+    {
+        "name": "Bank Robbers",
+        "queries": ["bank robbers"]
+    },
+    {
+        "name": "Terrorists",
+        "queries": ["terrorists"]
+    }
+]

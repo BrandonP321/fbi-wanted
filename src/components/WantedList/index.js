@@ -1,10 +1,12 @@
 import React from 'react'
 import './index.css'
 
-export default function WantedList() {
+export default function WantedList(props) {
     return (
-        <div>
-            
+        <div className='wanted-list-wrapper'>
+            {props.wantedPeople.map(person => {
+                
+            })}
         </div>
     )
 }

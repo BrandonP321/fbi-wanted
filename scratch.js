@@ -24,4 +24,26 @@ function getSubjects(page) {
     }
 }
 
-getSubjects(1)
+var locations = []
+
+function getLocations(page) {
+    if (page === 18) {
+        console.log(locations)
+        return true
+    } else {
+        return axios.get('https://api.fbi.gov/@wanted?pageSize=50&page=' + page)
+            .then(response => {
+                response.data.items.forEach(person => {
+                    console.log(person.locations)
+                    if (person.locations) {
+                        locations.push(person.location)
+                    }
+                })
+                console.log('page ' + page + ' done')
+                getLocations(page + 1)
+            })
+    }
+}
+getLocations(1)
+
+// getSubjects(1)
