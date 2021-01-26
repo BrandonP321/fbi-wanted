@@ -1,0 +1,11 @@
+.filter-collapse-body {
+    height: 0;
+    overflow: hidden;
+    transition: height 1s;
+}
+
+.filter-collapse-body .text-wrapper,
+.filter-collapse-header {
+    /* requires padding so height reflects height of children with margins */
+    padding: .25px;
+}
