@@ -48,9 +48,4 @@
 
 // // getSubjects(1)
 
-let str = "<p>Hello<p> there my</p> friend</p>"
-str = str.replace(/<p>/g, '')
-str = str.replace(/<\/p>/g, '')
-// str = str.replace(/<p>/g, '')
-
-console.log(str)
+console.log(typeof('hi'))

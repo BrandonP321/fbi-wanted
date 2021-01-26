@@ -39,12 +39,11 @@
 }
 
 .person-card .info-wrapper .name {
-    font-size: 
+    /* font-size:  */
 }
 
 .wanted-list-wrapper {
     width: calc(100% - 350px);
-    /* background-color: gray; */
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;

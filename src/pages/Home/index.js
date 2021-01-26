@@ -85,6 +85,10 @@ export default function Home() {
                 <Filters
                     filters={filters}
                     setFilters={setFilters}
+                    page={page}
+                    wantedArr={filteredWantedPeople}
+                    pageUp={pageUp}
+                    pageDown={pageDown}
                 />
             </div>
         </>

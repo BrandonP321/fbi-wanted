@@ -18,17 +18,21 @@ export default function WantedList(props) {
                     warning_message 
                 } = person
 
-                // make name capitalized
-                const nameArr = title.split(' ')
-                const newNameArr = nameArr.map(name => {
-                    // make name lowercase, then split chars
-                    let splitName = name.toLowerCase().split('')
-                    // make first letter uppercase, then return joined array
-                    splitName[0] = splitName[0].toUpperCase()
-                    return splitName.join('')
-                })
-                // join names back together
-                const name = newNameArr.join(' ')
+                if (title) {
+                    // make name capitalized
+                    const nameArr = title.split(' ')
+                    const newNameArr = nameArr.map(name => {
+                        // make name lowercase, then split chars
+                        let splitName = name.toLowerCase().split('')
+                        // make first letter uppercase, then return joined array
+                        if (typeof(splitName[0]) === 'string') {
+                            splitName[0] = splitName[0].toUpperCase()
+                        }
+                        return splitName.join('')
+                    })
+                    // join names back together
+                    var name = newNameArr.join(' ')
+                }
 
                 // if there are remarks, remove <p> and </p> from it's string
                 if (remarks) {

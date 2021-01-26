@@ -97,6 +97,10 @@ export default function Filters(props) {
                 </FilterCollapse.Body>
             </FilterCollapse>
             <button onClick={updateFilters}>Update Search</button>
+            <div className='page-btns-filter'>
+                <button className='page-prev' onClick={props.pageDown} disabled={props.page <= 0}>Prev</button>
+                <button className='page-next' onClick={props.pageUp} disabled={props.page * 10 + 9 >= props.wantedArr.length}>Next</button>
+            </div>
         </div>
     )
 }
