@@ -1,0 +1,44 @@
+.img-modal-wrapper {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    overflow: hidden;
+}
+
+.img-modal-wrapper.show {
+    width: 100%;
+}
+
+.img-modal-wrapper img {
+    position: relative;
+    max-width: 90%;
+    max-height: 90vh;
+    display: block;
+    margin: 0 auto;
+    /* vertical-align: middle; */
+}
+
+.img-modal-wrapper .modal-exit {
+    font-size: 3rem;
+    color: white;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    margin: 0;
+    line-height: 18px;
+}
+
+.img-modal-wrapper .modal-exit:hover {
+    cursor: pointer;
+}
+
+.img-modal-wrapper .overlay {
+    background-color: rgba(0, 0, 0, 0.596);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}

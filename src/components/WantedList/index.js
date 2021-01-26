@@ -41,7 +41,7 @@ export default function WantedList(props) {
                 }
 
                 return <div className='person-card'>
-                    <div className='img-wrapper'>
+                    <div className='img-wrapper' onClick={() => props.openImgInModal(images[0].original || images[0].large || images[0].thumb)}>
                         <img 
                             src={images[0].original || images[0].large || images[0].thumb} 
                             alt={`Image of wanted person ${title}`} 

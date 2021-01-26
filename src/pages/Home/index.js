@@ -5,6 +5,7 @@ import WantedList from '../../components/WantedList'
 import axios from 'axios'
 import API from '../../utils/API'
 import './index.css'
+import ImgModal from '../../components/ImgModal'
 
 export default function Home() {
     const wantedPeople = useRef([])
@@ -24,6 +25,9 @@ export default function Home() {
         sex: [],
         location: '',
     })
+
+    const [showImgModal, setShowImgModal] = useState(false)
+    const [imgToShow, setImgToShow] = useState(null)
 
     useEffect(() => {
         // make request to fbi api for list of all wanted persons
@@ -46,6 +50,15 @@ export default function Home() {
         // update state with array of 10 people to display
         setDisplayedPeople(filteredWantedPeople.slice(startIndex, endIndex))
     }, [page, filteredWantedPeople])
+
+    useEffect(() => {
+        // when img modal is being show, prevent page from being scrolled
+        if (showImgModal) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'auto'
+        }
+    }, [showImgModal])
 
     const getAllWanted = () => {
         // make request to server for wanted persons info
@@ -75,12 +88,24 @@ export default function Home() {
         setPage(page - 1)
     }
 
+    const openImgInModal = (src) => {
+        // set state with src of img to show
+        setImgToShow(src)
+        setShowImgModal(true)
+    }
+
+    const closeImgModal = () => {
+        setImgToShow(null)
+        setShowImgModal(false)
+    }
+
     return (
         <>
             <Hero />
             <div className='content-wrapper'>
                 <WantedList 
                     wantedPeople={displayedPeople}
+                    openImgInModal={openImgInModal}
                 />
                 <Filters
                     filters={filters}
@@ -91,6 +116,11 @@ export default function Home() {
                     pageDown={pageDown}
                 />
             </div>
+            <ImgModal 
+                show={showImgModal} 
+                src={imgToShow}
+                closeImgModal={closeImgModal}
+            />
         </>
     )
 }
