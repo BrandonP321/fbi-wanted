@@ -48,4 +48,9 @@
 
 // // getSubjects(1)
 
-console.log(typeof('hi'))
+const str = 'attack at the CapitoL'
+const regex = /\battack at the capitol/i
+
+const result = regex.test(str)
+
+console.log(result)

@@ -22,8 +22,8 @@ export default function Home() {
 
     const [filters, setFilters] = useState({
         subject: [],
-        sex: [],
-        location: '',
+        sex: '',
+        name: '',
     })
 
     const [showImgModal, setShowImgModal] = useState(false)
@@ -60,6 +60,16 @@ export default function Home() {
         }
     }, [showImgModal])
 
+    useEffect(() => {
+        // when filters state is changed, apply filter to all wanted people
+        if (filters.subject.length > 0 || filters.sex || filters.name) {
+            applyFilter()
+        } else {
+            // else no filters are applied so filtered arr can be set to array of all people
+            setFilteredWantedPeople(wantedPeople.current)
+        }
+    }, [filters])
+
     const getAllWanted = () => {
         // make request to server for wanted persons info
         API.getAllWanted()
@@ -76,8 +86,58 @@ export default function Home() {
             })
     }
 
-    const updateWantedPeople = (peopleArr = []) => {
-        console.log(peopleArr)
+    const applyFilter = () => {
+        let filteredArr = []
+        // filter by subjects if there are any subjects to filter by
+        if (filters.subject.length > 0) {
+            const subjectFilteredArr = wantedPeople.current.filter(person => {
+                // iterate over subjects arr for wanted person
+                for (let i = 0; i < person.subjects.length; i++) {
+                    const subject = person.subjects[i]
+
+                    // iterate over subjects arr in filter and compare filter with current subject in person's arr
+                    for (let i = 0; i < filters.subject.length; i++) {
+                        const filterSubject = filters.subject[i].toLowerCase();
+                        // create regex for comparing subject to filter
+                        const regex = new RegExp(`\\b${filterSubject}`, 'i')
+                        // test regex on subject string
+                        const isMatch = regex.test(subject)
+                        // if regex matches, return true, to keep this person in the new filtered array
+                        if (isMatch) return true
+                    }
+                }
+
+                // if nothing has been returned yet, we can return false since there is no match
+                return false
+            })
+            // set filteredArr to new arr
+            filteredArr = subjectFilteredArr;
+        }
+
+        // now filter by sex
+        // if filteredArr was just filtered by subject, we can just filter filteredArr
+        if (filters.sex) {
+            console.log('filtered sex is ' + filters.sex)
+            var arrToFilter;
+            // set array to filter to filteredArr only if it has people in it, else we must filter then entire array of wanted people
+            if (filteredArr.length > 0) arrToFilter = filteredArr
+            else arrToFilter = wantedPeople.current
+
+            const sexFilteredArr = arrToFilter.filter(person => {
+                // return true if person's sex matches filter
+                if (person.sex && person.sex.toLowerCase() === filters.sex.toLowerCase()) {
+                    return true
+                } else {
+                    return false
+                }
+            })  
+            
+            // set filteredArr to new sexFilteredArr
+            filteredArr = sexFilteredArr;
+        }
+
+        // set state of filtered people to new array of filtered people
+        setFilteredWantedPeople(filteredArr)
     }
 
     const pageUp = () => {

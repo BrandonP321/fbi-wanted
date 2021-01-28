@@ -36,7 +36,7 @@ export default function Filters(props) {
 
         // create new filters object with selected gender
         const newFilters = {
-            gender: genderNode.value !== 'all' ? genderNode.value : '',
+            sex: genderNode.value !== 'all' ? genderNode.value : '',
             subject: []
         }
         // iterate over subjectNodes and add theirs values to the filters obj as an array
