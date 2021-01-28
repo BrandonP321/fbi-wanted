@@ -40,6 +40,7 @@ function FilterCollapse(props) {
         // else return the children of the Header sub-component
         return <div className='filter-collapse-header' onClick={toggleCollapse} ref={collapseHeader}>
             {header.props.children}
+            <i className={`far fa-chevron-${showCollapse ? 'up' : 'down'} filter-arrow`}></i>
         </div>
     }
 

@@ -4,8 +4,33 @@
     transition: height 1s;
 }
 
+.filter-collapse-header {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.filter-collapse-header:hover {
+    cursor: pointer;
+}
+
+.filter-collapse-header h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.filter-collapse-header .filter-arrow {
+    font-size: 1.5rem;
+}
+
 .filter-collapse-body .text-wrapper,
 .filter-collapse-header {
     /* requires padding so height reflects height of children with margins */
     padding: .25px;
+}
+
+@media screen and (max-width: 1400px) {
+    .filter-collapse {
+        width: 30%;
+    }
 }

@@ -50,56 +50,67 @@ export default function Filters(props) {
             // spread the new values into the new filters object's subject arr
             newFilters.subject = [...newFilters.subject, ...sepValues]
         })
-        
+
         // update filters state hook with new obj
         props.setFilters(newFilters)
     }
 
+    const handleKeywordInputChange = e => {
+        // if user hits 'return' apply the filters since this input field is not in a form
+        const key = e.code || e.key
+        if (key === 'Enter') {
+            updateFilters();
+        }
+    }
+
     return (
         <div className={`filters-wrapper${isSticky ? ' sticky' : ''}`} ref={filtersDiv}>
-            <FilterCollapse>
-                <FilterCollapse.Header>
-                    <h3 className='filter-header-text'>Crime</h3>
-                </FilterCollapse.Header>
-                <FilterCollapse.Body>
-                    <form>
-                        {crimes.map((crime, index) => {
-                            return <div className='crime-filter-wrapper'>
-                                <label for={`crime${index}`}>
-                                    <input type='checkbox' className='crime-checkbox' id={`crime${index}`} name='crime-subject' value={crime.queries} />
-                                    {crime.name}
-                                </label>
-                            </div>
-                        })}
-                    </form>
-                </FilterCollapse.Body>
-            </FilterCollapse>
-            <FilterCollapse>
-                <FilterCollapse.Header>
-                    <h3 className='filter-header-text'>Gender</h3>
-                </FilterCollapse.Header>
-                <FilterCollapse.Body>
-                    <form>
-                        {genders.map(gender => {
-                            return <div className='gender-filter-wrapper'>
-                                <label for={`${gender}GenderRadio`}>
-                                    <input type='radio' className='gender-radio' id={`${gender}GenderRadio`} name='gender' value={gender.toLowerCase()}/>
-                                    {gender}
-                                </label>
-                            </div>
-                        })}
-                    </form>
-                </FilterCollapse.Body>
-            </FilterCollapse>
-            <FilterCollapse>
-                <FilterCollapse.Header>
-                    <h3 className='filter-header-text'>Search by Keyword</h3>
-                </FilterCollapse.Header>
-                <FilterCollapse.Body>
-                    <input ref={keywordInput} className='keyword-search-input' placeholder='Keyword'/>
-                </FilterCollapse.Body>
-            </FilterCollapse>
-            <button onClick={updateFilters}>Update Search</button>
+            <h2>Filters</h2>
+            <div className='collapse-wrapper'>
+                <FilterCollapse>
+                    <FilterCollapse.Header>
+                        <h3 className='filter-header-text'>Crime</h3>
+                    </FilterCollapse.Header>
+                    <FilterCollapse.Body>
+                        <form>
+                            {crimes.map((crime, index) => {
+                                return <div className='crime-filter-wrapper'>
+                                    <label for={`crime${index}`}>
+                                        <input type='checkbox' className='crime-checkbox' id={`crime${index}`} name='crime-subject' value={crime.queries} />
+                                        {crime.name}
+                                    </label>
+                                </div>
+                            })}
+                        </form>
+                    </FilterCollapse.Body>
+                </FilterCollapse>
+                <FilterCollapse>
+                    <FilterCollapse.Header>
+                        <h3 className='filter-header-text'>Gender</h3>
+                    </FilterCollapse.Header>
+                    <FilterCollapse.Body>
+                        <form>
+                            {genders.map(gender => {
+                                return <div className='gender-filter-wrapper'>
+                                    <label for={`${gender}GenderRadio`}>
+                                        <input type='radio' className='gender-radio' id={`${gender}GenderRadio`} name='gender' value={gender.toLowerCase()} />
+                                        {gender}
+                                    </label>
+                                </div>
+                            })}
+                        </form>
+                    </FilterCollapse.Body>
+                </FilterCollapse>
+                <FilterCollapse>
+                    <FilterCollapse.Header>
+                        <h3 className='filter-header-text'>Search by Keyword</h3>
+                    </FilterCollapse.Header>
+                    <FilterCollapse.Body>
+                        <input ref={keywordInput} className='keyword-search-input' placeholder='Keyword' onKeyDown={handleKeywordInputChange} />
+                    </FilterCollapse.Body>
+                </FilterCollapse>
+            </div>
+            <button className='update-search-btn' onClick={updateFilters}>Update Search</button>
             <div className='page-btns-filter'>
                 <button className='page-prev' onClick={props.pageDown} disabled={props.page <= 0}>Prev</button>
                 <button className='page-next' onClick={props.pageUp} disabled={props.page * 10 + 9 >= props.wantedArr.length}>Next</button>

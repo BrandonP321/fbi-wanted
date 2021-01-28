@@ -1,15 +1,21 @@
 .filters-wrapper {
     width: 350px;
-    height: 100vh;
     background-color: #0a2457;
     display: inline-block;
     color: white;
+    padding: 0px 10px;
+    box-sizing: border-box;
 }
 
 .filters-wrapper.sticky {
     position: fixed;
     top: 0;
     right: 0;
+    height: 100vh;
+}
+
+.filters-wrapper h2 {
+    text-align: center;
 }
 
 .keyword-search-input {
@@ -17,6 +23,8 @@
     padding: 5px 10px;
     font-size: 1.1rem;
     border-radius: 5px;
+    box-sizing: border-box;
+    border: none;
 }
 
 .page-btns-filter {
@@ -46,4 +54,36 @@
 
 .page-prev:disabled:hover, .page-next:disabled:hover {
     cursor: auto;
+}
+
+.update-search-btn {
+    font-size: 1rem;
+    border: none;
+    border-radius: .25rem;
+    line-height: 1.5rem;
+    padding: .375rem .75rem;
+    margin: 20px 0;
+}
+
+@media screen and (max-width: 1400px) {
+    .collapse-wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .filters-wrapper {
+        width: 100%;
+    }
+
+    /* set all values making it sticky to their default at this screen width */
+    .filters-wrapper.sticky {
+        position: relative;
+        top: auto;
+        right: auto;
+        height: auto;
+    }
+
+    .page-btns-filter {
+        display: none;
+    }
 }

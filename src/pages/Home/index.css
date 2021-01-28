@@ -1,5 +1,12 @@
 .content-wrapper {
     width: 100%;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+}
+
+@media screen and (max-width: 1400px) {
+    .content-wrapper {
+        flex-direction: column-reverse;
+    }
 }

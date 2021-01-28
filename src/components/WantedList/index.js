@@ -4,6 +4,7 @@ import './index.css'
 export default function WantedList(props) {
     return (
         <div className='wanted-list-wrapper'>
+            <h2>FBI'S MOST WANTED</h2>
             {props.wantedPeople.map(person => {
                 const { 
                     images, 
@@ -55,7 +56,6 @@ export default function WantedList(props) {
                         <p className='gender'><strong>Sex:</strong> {sex || 'N/A'}</p>
                         <p className='subject'><strong>Subject(s):</strong> {subjects.join(', ') || 'N/A'}</p>
                         <p className='warning'>{warning_message ? `WARNING: ${warning_message}` : ''}</p>
-                        <p className='remarks'>{remarks ? modifiedRemarks : ''}</p>
                     </div>
                 </div>
             })}
