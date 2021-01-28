@@ -14,6 +14,8 @@ export default function Filters(props) {
 
     const filtersDiv = useRef()
 
+    const keywordInput = useRef()
+
     useEffect(() => {
         // create scroll event listener for when to make filters div sticky to top of screen
         window.addEventListener('scroll', event => {
@@ -37,7 +39,8 @@ export default function Filters(props) {
         // create new filters object with selected gender
         const newFilters = {
             sex: genderNode.value !== 'all' ? genderNode.value : '',
-            subject: []
+            subject: [],
+            keyword: keywordInput.current.value
         }
         // iterate over subjectNodes and add theirs values to the filters obj as an array
         subjectNodes.forEach(subject => {
@@ -90,10 +93,10 @@ export default function Filters(props) {
             </FilterCollapse>
             <FilterCollapse>
                 <FilterCollapse.Header>
-                    <h3 className='filter-header-text'>Name</h3>
+                    <h3 className='filter-header-text'>Search by Keyword</h3>
                 </FilterCollapse.Header>
                 <FilterCollapse.Body>
-                    <p>I am a body</p>
+                    <input ref={keywordInput} className='keyword-search-input' placeholder='Keyword'/>
                 </FilterCollapse.Body>
             </FilterCollapse>
             <button onClick={updateFilters}>Update Search</button>

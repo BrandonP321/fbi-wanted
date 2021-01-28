@@ -12,6 +12,13 @@
     right: 0;
 }
 
+.keyword-search-input {
+    width: 100%;
+    padding: 5px 10px;
+    font-size: 1.1rem;
+    border-radius: 5px;
+}
+
 .page-btns-filter {
     width: 50%;
     margin: 20px auto;

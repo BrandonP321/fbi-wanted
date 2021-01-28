@@ -23,7 +23,7 @@ export default function Home() {
     const [filters, setFilters] = useState({
         subject: [],
         sex: '',
-        name: '',
+        keyword: '',
     })
 
     const [showImgModal, setShowImgModal] = useState(false)
@@ -62,7 +62,7 @@ export default function Home() {
 
     useEffect(() => {
         // when filters state is changed, apply filter to all wanted people
-        if (filters.subject.length > 0 || filters.sex || filters.name) {
+        if (filters.subject.length > 0 || filters.sex || filters.keyword) {
             applyFilter()
         } else {
             // else no filters are applied so filtered arr can be set to array of all people
@@ -117,8 +117,7 @@ export default function Home() {
         // now filter by sex
         // if filteredArr was just filtered by subject, we can just filter filteredArr
         if (filters.sex) {
-            console.log('filtered sex is ' + filters.sex)
-            var arrToFilter;
+            let arrToFilter;
             // set array to filter to filteredArr only if it has people in it, else we must filter then entire array of wanted people
             if (filteredArr.length > 0) arrToFilter = filteredArr
             else arrToFilter = wantedPeople.current
@@ -134,6 +133,35 @@ export default function Home() {
             
             // set filteredArr to new sexFilteredArr
             filteredArr = sexFilteredArr;
+        }
+
+        // filter by name
+        // if filteredArr is empty, we must filter entire array of wanted people
+        if (filters.keyword) {
+            let arrToFilter;
+            // set array to filter to either filteredArr or entire arr of wanted people
+            if (filteredArr.length > 0) arrToFilter = filteredArr
+            else arrToFilter = wantedPeople.current;
+
+            const keywordFilteredArr = arrToFilter.filter(person => {
+                // create regex to test for name match
+                const regex = new RegExp(`\\b${filters.keyword}`, 'i')
+                
+                // due to the fbi api not providing a clear name for every person, we will test 
+                // the regex on multiple parts of the person's obj
+                let isMatch;
+                // on each test, if there is a match return true to add the person to the filtered arr
+                if (person.title && regex.test(person.title)) return true
+                else if (person.details && regex.test(person.details)) return true
+                else if (person.remarks && regex.test(person.remarks)) return true
+                else {
+                    // if no matches, return false
+                    return false
+                }
+            })
+
+            // set filteredArr to nameFilteredArr
+            filteredArr = keywordFilteredArr
         }
 
         // set state of filtered people to new array of filtered people
