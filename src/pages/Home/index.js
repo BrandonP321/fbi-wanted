@@ -41,12 +41,12 @@ export default function Home() {
         // check if end index is less than or equal to largest index in the arr of filtered people
         if (page * 10 + 9 <= filteredWantedPeople.length - 1) {
             // expression allows for 10 people to be displayed at a time
-            endIndex = page * 10 + 9
+            endIndex = page * 10 + 10
         } else {
             // else less than 10 people are left to be displayed so end index is last index of arr
-            endIndex = filteredWantedPeople.length - 1
+            endIndex = filteredWantedPeople.length
         }
-
+        console.log(startIndex, endIndex)
         // update state with array of 10 people to display
         setDisplayedPeople(filteredWantedPeople.slice(startIndex, endIndex))
     }, [page, filteredWantedPeople])
@@ -199,6 +199,7 @@ export default function Home() {
                     filters={filters}
                     setFilters={setFilters}
                     page={page}
+                    setPage={setPage}
                     wantedArr={filteredWantedPeople}
                     pageUp={pageUp}
                     pageDown={pageDown}

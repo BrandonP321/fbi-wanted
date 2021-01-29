@@ -16,6 +16,8 @@ export default function Filters(props) {
 
     const keywordInput = useRef()
 
+    const filtersHeading = useRef()
+
     useEffect(() => {
         // create scroll event listener for when to make filters div sticky to top of screen
         window.addEventListener('scroll', event => {
@@ -53,6 +55,12 @@ export default function Filters(props) {
 
         // update filters state hook with new obj
         props.setFilters(newFilters)
+
+        // set page back to first page
+        props.setPage(0)
+
+        // scroll 100vh from top of page to get back to top of results
+        window.scrollTo(0, window.innerHeight)
     }
 
     const handleKeywordInputChange = e => {
@@ -65,7 +73,7 @@ export default function Filters(props) {
 
     return (
         <div className={`filters-wrapper${isSticky ? ' sticky' : ''}`} ref={filtersDiv}>
-            <h2>Filters</h2>
+            <h2 ref={filtersHeading}>Filters</h2>
             <div className='collapse-wrapper'>
                 <FilterCollapse>
                     <FilterCollapse.Header>
