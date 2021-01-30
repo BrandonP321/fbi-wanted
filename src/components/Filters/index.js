@@ -59,6 +59,9 @@ export default function Filters(props) {
         // set page back to first page
         props.setPage(0)
 
+        // hide filters div if on mobile
+        props.setShowMobile(false)
+
         // scroll 100vh from top of page to get back to top of results
         window.scrollTo(0, window.innerHeight)
     }
@@ -72,7 +75,8 @@ export default function Filters(props) {
     }
 
     return (
-        <div className={`filters-wrapper${isSticky ? ' sticky' : ''}`} ref={filtersDiv}>
+        <div className={`filters-wrapper${isSticky ? ' sticky' : ''}${props.showMobile ? ' show-mobile' : ''}`} ref={filtersDiv}>
+            <p className='mobile-exit-icon' onClick={() => props.setShowMobile(false)}>&times;</p>
             <h2 ref={filtersHeading}>Filters</h2>
             <div className='collapse-wrapper'>
                 <FilterCollapse>

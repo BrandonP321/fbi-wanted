@@ -1,17 +1,11 @@
 .filters-wrapper {
+    position: relative;
     width: 350px;
     background-color: #0a2457;
     display: inline-block;
     color: white;
     padding: 0px 10px;
     box-sizing: border-box;
-}
-
-.filters-wrapper.sticky {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
 }
 
 .filters-wrapper h2 {
@@ -25,6 +19,20 @@
     border-radius: 5px;
     box-sizing: border-box;
     border: none;
+}
+
+.mobile-exit-icon {
+    display: none;
+    font-size: 3rem;
+    line-height: 15px;
+    margin: 0;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.mobile-exit-icon:hover {
+    cursor: pointer;
 }
 
 .page-btns-filter {
@@ -65,7 +73,17 @@
     margin: 20px 0;
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (min-width: 1401px) {
+    /* only apply props to sticky filter div when screen is larger than 1400px */
+    .filters-wrapper.sticky {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+    }
+}
+
+@media screen and (max-width: 1400px) and (min-width: 900px) {
     .collapse-wrapper {
         display: flex;
         justify-content: space-between;
@@ -75,15 +93,42 @@
         width: 100%;
     }
 
-    /* set all values making it sticky to their default at this screen width */
-    .filters-wrapper.sticky {
-        position: relative;
-        top: auto;
-        right: auto;
-        height: auto;
+    .page-btns-filter {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 899px) {
+    .filters-wrapper {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        right: -350px;
+        overflow-y: auto;
+        transition: right 1s;
+    }
+    
+    .filters-wrapper.show-mobile {
+        right: 0;
+    }
+
+    .mobile-exit-icon {
+        display: inline-block;
     }
 
     .page-btns-filter {
         display: none;
+    }
+
+    .update-search-btn {
+        float: right;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .filters-wrapper {
+        width: 100%;
+        right: -100%;
     }
 }

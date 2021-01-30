@@ -29,7 +29,7 @@
     padding: .25px;
 }
 
-@media screen and (max-width: 1400px) {
+@media screen and (max-width: 1400px) and (min-width: 900px) {
     .filter-collapse {
         width: 30%;
     }

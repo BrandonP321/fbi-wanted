@@ -29,6 +29,8 @@ export default function Home() {
     const [showImgModal, setShowImgModal] = useState(false)
     const [imgToShow, setImgToShow] = useState(null)
 
+    const [showMobileFilters, setShowMobileFilters] = useState(false)
+
     useEffect(() => {
         // make request to fbi api for list of all wanted persons
         getAllWanted()
@@ -191,6 +193,7 @@ export default function Home() {
         <>
             <Hero />
             <div className='content-wrapper'>
+                <button className='mobile-filters-btn' onClick={() => setShowMobileFilters(true)}>Filters</button>
                 <WantedList 
                     wantedPeople={displayedPeople}
                     openImgInModal={openImgInModal}
@@ -203,6 +206,8 @@ export default function Home() {
                     wantedArr={filteredWantedPeople}
                     pageUp={pageUp}
                     pageDown={pageDown}
+                    showMobile={showMobileFilters}
+                    setShowMobile={setShowMobileFilters}
                 />
             </div>
             <ImgModal 
