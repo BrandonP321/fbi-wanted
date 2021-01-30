@@ -51,10 +51,17 @@
 
 .wanted-list-wrapper h2 {
     font-size: 3rem;
+    text-align: center;
 }
 
 @media screen and (max-width: 1400px) {
     .wanted-list-wrapper {
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .wanted-list-wrapper h2 {
+        font-size: 2.5rem;
     }
 }

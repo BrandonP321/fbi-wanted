@@ -7,7 +7,7 @@ export default function Hero() {
             <img src='./assets/img/capitol-far.jpg'/>
             <div className='overlay'></div>
             <div className='text-wrapper'>
-                <h1>FBI<br />WANTED</h1>
+                <h1>FBI <br />WANTED</h1>
             </div>
         </div>
     )

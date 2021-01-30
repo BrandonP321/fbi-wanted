@@ -10,6 +10,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: 44% 50%;
 }
 
 .hero .overlay {
@@ -32,4 +33,38 @@
 .hero .text-wrapper h1 {
     margin-top: 0;
     font-size: 5.5rem;
+}
+
+@media screen and (max-width: 1300px) {
+    .hero .text-wrapper {
+        display: block;
+        left: 0;
+        text-align: center;
+    }
+
+    .hero .text-wrapper h1 {
+        font-size: 7rem;
+    }
+
+    .hero .text-wrapper br {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .hero .text-wrapper h1 {
+        font-size: 5.5rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .hero .text-wrapper h1 {
+        font-size: 4rem;
+    }
+}
+
+@media screen and (max-width: 350px) {
+    .hero .text-wrapper h1 {
+        font-size: 3rem;
+    }
 }
