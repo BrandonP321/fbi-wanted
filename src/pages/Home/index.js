@@ -31,6 +31,9 @@ export default function Home() {
 
     const [showMobileFilters, setShowMobileFilters] = useState(false)
 
+    // indicates site is loading data from api
+    const [isLoading, setIsLoading] = useState(true)
+
     useEffect(() => {
         // make request to fbi api for list of all wanted persons
         getAllWanted()
@@ -82,6 +85,8 @@ export default function Home() {
 
                 // people to display can also be set at this point as no filters have been placed yet
                 setFilteredWantedPeople(res.data)
+
+                setIsLoading(false)
             })
             .catch(err => {
                 console.log(err)
@@ -197,6 +202,7 @@ export default function Home() {
                 <WantedList 
                     wantedPeople={displayedPeople}
                     openImgInModal={openImgInModal}
+                    isLoading={isLoading}
                 />
                 <Filters
                     filters={filters}

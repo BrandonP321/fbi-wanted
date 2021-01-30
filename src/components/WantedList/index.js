@@ -6,17 +6,17 @@ export default function WantedList(props) {
         <div className='wanted-list-wrapper'>
             <h2>FBI'S MOST WANTED</h2>
             {props.wantedPeople.map(person => {
-                const { 
-                    images, 
-                    title, 
-                    description, 
-                    reward_max, 
-                    reward_min, 
+                const {
+                    images,
+                    title,
+                    description,
+                    reward_max,
+                    reward_min,
                     reward_text,
-                    remarks, 
-                    sex, 
-                    subjects, 
-                    warning_message 
+                    remarks,
+                    sex,
+                    subjects,
+                    warning_message
                 } = person
 
                 if (title) {
@@ -26,7 +26,7 @@ export default function WantedList(props) {
                         // make name lowercase, then split chars
                         let splitName = name.toLowerCase().split('')
                         // make first letter uppercase, then return joined array
-                        if (typeof(splitName[0]) === 'string') {
+                        if (typeof (splitName[0]) === 'string') {
                             splitName[0] = splitName[0].toUpperCase()
                         }
                         return splitName.join('')
@@ -43,9 +43,9 @@ export default function WantedList(props) {
 
                 return <div className='person-card'>
                     <div className='img-wrapper' onClick={() => props.openImgInModal(images[0].original || images[0].large || images[0].thumb)}>
-                        <img 
-                            src={images[0].original || images[0].large || images[0].thumb} 
-                            alt={`Image of wanted person ${title}`} 
+                        <img
+                            src={images[0].original || images[0].large || images[0].thumb}
+                            alt={`Image of wanted person ${title}`}
                         />
                         <i className='fas fa-search-plus'></i>
                     </div>
@@ -59,6 +59,11 @@ export default function WantedList(props) {
                     </div>
                 </div>
             })}
+            <div className={`loading-display${props.isLoading ? ' show' : ''}`}>
+                <p>
+                    Loading Data <i className='fad fa-spinner-third spinner'></i>
+                </p>
+            </div>
         </div>
     )
 }
