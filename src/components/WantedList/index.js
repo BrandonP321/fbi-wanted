@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import './index.css'
 
 export default function WantedList(props) {
@@ -41,24 +41,42 @@ export default function WantedList(props) {
                     modifiedRemarks = modifiedRemarks.replace(/<\/p>/g, '')
                 }
 
+                // get image from person obj
+                const imgToUse = images[0].original || images[0].large || images[0].thumb
+
+                // pick apart route for id of person
+                const splitRoute = person['@id'].split('/')
+                const personId = splitRoute[splitRoute.length - 1]
+
+                // get english file from list of files
+                var engFile = person.files.filter(file => file.name.toLowerCase() === 'english')
+                engFile = engFile[0].url
+
                 return <div className='person-card'>
-                    <div className='img-wrapper' onClick={() => props.openImgInModal(images[0].original || images[0].large || images[0].thumb)}>
+                    <div className={`img-wrapper`} onClick={() => props.openImgInModal(images[0].original || images[0].large || images[0].thumb)}>
                         <img
-                            src={images[0].original || images[0].large || images[0].thumb}
+                            src={imgToUse}
                             alt={`Image of wanted person ${title}`}
-                        />
+                            />
                         <i className='fas fa-search-plus'></i>
                     </div>
-                    <div className='info-wrapper'>
-                        <p className='name'>{name}</p>
+                    <div className={`info-wrapper`}>
+                        <strong><p className='name'>{name}</p></strong>
                         <p className='description'>{description}</p>
                         <p className='reward'><strong>Reward:</strong> {!reward_max ? 'N/A' : reward_min || reward_min === 0 ? `$${reward_min} - $${reward_max}` : 'N/A'}</p>
                         <p className='gender'><strong>Sex:</strong> {sex || 'N/A'}</p>
                         <p className='subject'><strong>Subject(s):</strong> {subjects.join(', ') || 'N/A'}</p>
                         <p className='warning'>{warning_message ? `WARNING: ${warning_message}` : ''}</p>
+                        <div className='btn-group'>
+                            <a href={engFile} target='_blank'>Official File</a>
+                        </div>
                     </div>
                 </div>
             })}
+            <div className={`page-btns${!props.isLoading ? ' show' : ''}`}>
+                <button className='page-down' onClick={props.pageDown} disabled={props.page === 0}>Prev</button>
+                <button className='page-up' onClick={props.pageUp} disabled={props.page * 10 + 9 >= props.wantedArr.length}>Next</button>
+            </div>
             <div className={`loading-display${props.isLoading ? ' show' : ''}`}>
                 <p>
                     Loading Data <i className='fad fa-spinner-third spinner'></i>

@@ -177,10 +177,16 @@ export default function Home() {
 
     const pageUp = () => {
         setPage(page + 1)
+
+        // scroll to top of list
+        window.scrollTo(0, window.innerHeight)
     }
 
     const pageDown = () => {
         setPage(page - 1)
+
+        // scroll to top of list
+        window.scrollTo(0, window.innerHeight)
     }
 
     const openImgInModal = (src) => {
@@ -202,6 +208,11 @@ export default function Home() {
                 <WantedList 
                     wantedPeople={displayedPeople}
                     openImgInModal={openImgInModal}
+                    page={page}
+                    setPage={setPage}
+                    pageUp={pageUp}
+                    pageDown={pageDown}
+                    wantedArr={filteredWantedPeople}
                     isLoading={isLoading}
                 />
                 <Filters

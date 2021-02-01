@@ -48,10 +48,6 @@
 
 // // getSubjects(1)
 
-const str = 'attack at the CapitoL'
-// const regex = /\battack at the capitol/i
-const regex = new RegExp('\\b')
-
-const result = regex.test(str)
-
-console.log(result)
+const arr = ''
+if (arr) console.log(true)
+else console.log(false)

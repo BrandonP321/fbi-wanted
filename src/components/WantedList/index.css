@@ -15,7 +15,42 @@
     animation: spin 2s linear infinite;
 }
 
+.page-btns {
+    display: none;
+    justify-content: space-between;
+    width: 80%;
+    max-width: 200px;
+    margin-bottom: 20px;
+}
+
+.page-btns.show {
+    display: flex;
+}
+
+.page-btns button {
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
+    border: none;
+    border-radius: .25rem;
+    background-color: #0a2457;
+    color: white;
+}
+
+.page-btns button:hover {
+    cursor: pointer;
+}
+
+.page-btns button:disabled {
+    background-color: #0a2457ab;
+}
+
+.page-btns button:disabled:hover {
+    cursor: auto;
+}
+
 .person-card {
+    position: relative;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -37,6 +72,7 @@
     cursor: pointer;
 }
 
+
 .person-card .img-wrapper img {
     width: 100%;
     max-height: 400px;
@@ -55,8 +91,37 @@
     width: 65%;
 }
 
+.person-card .info-wrapper p {
+    font-size: 1.1rem;
+}
+
+.person-card .info-wrapper .btn-group {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 10px;
+}
+
+.person-card .info-wrapper .btn-group a {
+    text-decoration: none;
+    color: white;
+    background-color: #0a2457;
+    padding: .375rem .75rem;
+    line-height: 1.5rem;
+    font-size: 1rem;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
 .person-card .info-wrapper .name {
-    /* font-size:  */
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.person-card .info-wrapper .description {
+    text-align: center;
+    margin-top: 0px;
 }
 
 .wanted-list-wrapper {
@@ -74,6 +139,29 @@
 @media screen and (max-width: 1400px) {
     .wanted-list-wrapper {
         width: 100%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .person-card {
+        width: 95%;
+    }
+    
+    .person-card .info-wrapper {
+        width: 95%;
+        margin: 0 auto;
+    }
+
+    .person-card .img-wrapper {
+        width: 100%;
+        max-width: 95%;
+        height: auto;
+        max-height: 50vh;
+        margin: 0 auto;
+    }
+
+    .person-card .img-wrapper img {
+        max-height: 100%;
     }
 }
 
